@@ -1,0 +1,112 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-typecheck:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm db:generate
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [lint-and-typecheck]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm db:generate
+
+      - name: Build all packages
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_APP_URL: https://shop.mipueblofleamarket.com
+          NEXTAUTH_SECRET: ci-build-secret-placeholder
+          NEXTAUTH_URL: https://shop.mipueblofleamarket.com
+          DATABASE_URL: postgresql://shop:shop@localhost:5432/shop_ci
+          REDIS_URL: redis://localhost:6379
+          STRIPE_SECRET_KEY: sk_test_placeholder
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_placeholder
+          CLOUDFLARE_ACCOUNT_ID: placeholder
+          R2_ACCESS_KEY_ID: placeholder
+          R2_SECRET_ACCESS_KEY: placeholder
+          RESEND_API_KEY: re_placeholder
+
+  # Test job placeholder — activar en Fase 1 cuando se escriban los primeros tests
+  # test:
+  #   name: Tests
+  #   runs-on: ubuntu-latest
+  #   needs: [build]
+  #   services:
+  #     postgres:
+  #       image: postgres:16-alpine
+  #       env:
+  #         POSTGRES_USER: shop
+  #         POSTGRES_PASSWORD: shop_test
+  #         POSTGRES_DB: shop_test
+  #       ports: ['5432:5432']
+  #     redis:
+  #       image: redis:7-alpine
+  #       ports: ['6379:6379']
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: pnpm/action-setup@v4
+  #     - uses: actions/setup-node@v4
+  #       with: { node-version: 20, cache: pnpm }
+  #     - run: pnpm install --frozen-lockfile
+  #     - run: pnpm db:migrate
+  #     - run: pnpm test

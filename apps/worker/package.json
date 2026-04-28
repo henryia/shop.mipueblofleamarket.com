@@ -1,0 +1,25 @@
+{
+  "name": "@shop/worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BullMQ workers — emails, payouts, video, logística",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf node_modules dist"
+  },
+  "dependencies": {
+    "@shop/db": "workspace:*",
+    "bullmq": "^5.17.0",
+    "ioredis": "^5.4.1"
+  },
+  "devDependencies": {
+    "@shop/config": "workspace:*",
+    "@types/node": "^22.8.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

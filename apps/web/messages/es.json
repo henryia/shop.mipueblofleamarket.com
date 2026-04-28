@@ -1,0 +1,80 @@
+{
+  "HomePage": {
+    "metaTitle": "Mi Pueblo Shop — Marketplace de Mi Pueblo Flea Market",
+    "metaDescription": "Compra ropa, electrónicos, joyería y más de los mejores vendedores de Mi Pueblo Flea Market. Envíos a todo EE.UU.",
+    "title": "Bienvenido a Mi Pueblo Shop",
+    "subtitle": "El marketplace oficial de Mi Pueblo Flea Market. 600+ vendedores, miles de productos.",
+    "ctaBrowse": "Explorar productos",
+    "ctaVendor": "Vender aquí"
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "backHome": "Volver al inicio"
+  },
+  "Nav": {
+    "home": "Inicio",
+    "categories": "Categorías",
+    "vendors": "Vendedores",
+    "cart": "Carrito",
+    "account": "Mi cuenta",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "vendorDashboard": "Panel de vendedor",
+    "adminDashboard": "Panel de admin",
+    "searchPlaceholder": "Buscar productos..."
+  },
+  "Product": {
+    "addToCart": "Agregar al carrito",
+    "buyNow": "Comprar ahora",
+    "outOfStock": "Agotado",
+    "price": "Precio",
+    "variants": "Variantes",
+    "selectSize": "Selecciona talla",
+    "selectColor": "Selecciona color",
+    "description": "Descripción",
+    "vendor": "Vendedor",
+    "shipping": "Envío",
+    "returns": "Devoluciones"
+  },
+  "Cart": {
+    "title": "Tu carrito",
+    "empty": "Tu carrito está vacío",
+    "continueShopping": "Continuar comprando",
+    "checkout": "Pagar",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "tax": "Impuesto",
+    "remove": "Eliminar",
+    "quantity": "Cantidad"
+  },
+  "Auth": {
+    "signIn": "Iniciar sesión",
+    "signUp": "Crear cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "orContinueWith": "O continuar con",
+    "haveAccount": "¿Ya tienes cuenta?",
+    "noAccount": "¿No tienes cuenta?",
+    "termsAgreement": "Al crear una cuenta aceptas nuestros {terms} y {privacy}",
+    "terms": "Términos de servicio",
+    "privacy": "Política de privacidad"
+  },
+  "Vendor": {
+    "applyTitle": "Convierte tu puesto en tienda online",
+    "applySubtitle": "Llega a miles de compradores sin moverte del flea market.",
+    "apply": "Registrar mi tienda",
+    "dashboard": "Mi tienda",
+    "products": "Mis productos",
+    "orders": "Mis pedidos",
+    "payouts": "Mis pagos",
+    "settings": "Configuración"
+  },
+  "Errors": {
+    "generic": "Algo salió mal. Inténtalo de nuevo.",
+    "notFound": "No encontrado",
+    "unauthorized": "No autorizado",
+    "forbidden": "Acceso denegado"
+  }
+}

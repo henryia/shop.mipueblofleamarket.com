@@ -1,0 +1,10 @@
+{
+  "extends": "@shop/config/tsconfig/nextjs",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

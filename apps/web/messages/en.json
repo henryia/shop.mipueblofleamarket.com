@@ -1,0 +1,80 @@
+{
+  "HomePage": {
+    "metaTitle": "Mi Pueblo Shop — Mi Pueblo Flea Market Marketplace",
+    "metaDescription": "Shop clothing, electronics, jewelry and more from the best vendors at Mi Pueblo Flea Market. Shipping across the US.",
+    "title": "Welcome to Mi Pueblo Shop",
+    "subtitle": "The official marketplace of Mi Pueblo Flea Market. 600+ vendors, thousands of products.",
+    "ctaBrowse": "Browse products",
+    "ctaVendor": "Sell here"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "backHome": "Back to home"
+  },
+  "Nav": {
+    "home": "Home",
+    "categories": "Categories",
+    "vendors": "Vendors",
+    "cart": "Cart",
+    "account": "My account",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "vendorDashboard": "Vendor dashboard",
+    "adminDashboard": "Admin dashboard",
+    "searchPlaceholder": "Search products..."
+  },
+  "Product": {
+    "addToCart": "Add to cart",
+    "buyNow": "Buy now",
+    "outOfStock": "Out of stock",
+    "price": "Price",
+    "variants": "Variants",
+    "selectSize": "Select size",
+    "selectColor": "Select color",
+    "description": "Description",
+    "vendor": "Vendor",
+    "shipping": "Shipping",
+    "returns": "Returns"
+  },
+  "Cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue shopping",
+    "checkout": "Checkout",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "remove": "Remove",
+    "quantity": "Quantity"
+  },
+  "Auth": {
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "email": "Email address",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "orContinueWith": "Or continue with",
+    "haveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "termsAgreement": "By creating an account you agree to our {terms} and {privacy}",
+    "terms": "Terms of service",
+    "privacy": "Privacy policy"
+  },
+  "Vendor": {
+    "applyTitle": "Turn your booth into an online store",
+    "applySubtitle": "Reach thousands of buyers without leaving the flea market.",
+    "apply": "Register my store",
+    "dashboard": "My store",
+    "products": "My products",
+    "orders": "My orders",
+    "payouts": "My payments",
+    "settings": "Settings"
+  },
+  "Errors": {
+    "generic": "Something went wrong. Please try again.",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Access denied"
+  }
+}

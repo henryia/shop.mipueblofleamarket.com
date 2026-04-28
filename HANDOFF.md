@@ -3,7 +3,7 @@
 > **Documento de traspaso del proyecto.** Léelo completo antes de continuar. Está escrito para que cualquier otra IA o desarrollador pueda retomar el trabajo sin perder contexto.
 
 **Última actualización:** 28 de abril de 2026
-**Estado general:** Fase de planificación completada. Repo conectado a GitHub. Listo para arrancar Fase 0 (scaffold del monorepo).
+**Estado general:** ✅ FASE 0 COMPLETADA. Scaffold completo del monorepo generado (82 archivos). Listo para arrancar Fase 1 (Auth + onboarding de vendors). Pendiente: pnpm install + git push por Henry.
 
 ---
 
@@ -80,18 +80,44 @@ Live shopping, programa de afiliados, chat en tiempo real, ads manager, recomend
 - **Branch principal:** `main`
 - **Último commit:** `25915e0 chore: merge initial repo state with arquitectura, README y gitignore`
 
-### 3.2 Archivos actuales en el repo
+### 3.2 Archivos actuales en el repo (post Fase 0 — 82 archivos)
 
 ```
 shop.mipueblofleamarket.com/
-├── .gitattributes              # auto-generado por GitHub
-├── .gitignore                  # configurado para Next.js + pnpm + Prisma
-├── ARQUITECTURA-Y-PLAN-MVP.md  # blueprint técnico completo (~45KB)
-├── HANDOFF.md                  # este documento
-└── README.md                   # resumen del proyecto
+├── .editorconfig / .prettierrc / .npmrc / turbo.json
+├── .env.example                # todas las variables del proyecto documentadas
+├── .github/workflows/
+│   ├── ci.yml                  # lint + typecheck + build en PR
+│   └── deploy.yml              # deploy SSH a VPS (secrets vacíos hasta tener VPS)
+├── docker-compose.yml          # Postgres 16 + Redis 7 local
+├── ecosystem.config.js         # PM2: shop-web (cluster x2) + shop-worker
+├── package.json / pnpm-workspace.yaml / tsconfig.base.json
+├── apps/
+│   ├── web/                    # Next.js 14 App Router + i18n + Auth.js stub
+│   │   ├── src/app/[locale]/   # layout bilingüe, home page, not-found
+│   │   ├── src/i18n/           # routing, navigation, request config
+│   │   ├── src/lib/auth.ts     # Auth.js con Google + Credentials
+│   │   ├── src/middleware.ts   # next-intl middleware
+│   │   └── messages/{es,en}.json
+│   └── worker/                 # BullMQ: email + payout + video workers
+├── packages/
+│   ├── api/                    # tRPC: products, vendors, cart, orders routers
+│   ├── config/                 # ESLint, Tailwind preset Mi Pueblo, tsconfig
+│   ├── db/                     # Prisma schema completo + migración SQL + seed
+│   ├── integrations/           # Stripe, R2, Resend, EasyPost, TikTok stubs
+│   └── ui/                     # Button, Badge, Card, ProductCard components
+└── infra/nginx/                # config Nginx + TLS para el VPS
 ```
 
-**El código del proyecto (apps/, packages/, infra/) AÚN NO EXISTE.** Es lo que generaremos en Fase 0.
+**PENDIENTE (Henry debe hacer):**
+```powershell
+cd "C:\Mi Pueblo Flea Market\shop\Shop.mipueblofleamarket.com"
+pnpm install          # instalar todas las dependencias
+pnpm db:generate      # generar el cliente de Prisma (requiere conexión a DB)
+git add .
+git commit -m "feat: Fase 0 — scaffold completo del monorepo"
+git push
+```
 
 ### 3.3 Modelo de colaboración con IA
 
@@ -151,6 +177,15 @@ El archivo **`ARQUITECTURA-Y-PLAN-MVP.md`** contiene el blueprint completo en 14
 | — | Instalación de Git en Windows |
 | — | Inicialización del repo local + push a GitHub |
 | 23 | Modelo de trabajo Cowork ↔ GitHub definido |
+| **4** | **Fase 0 — Scaffold monorepo** (package.json, turbo.json, pnpm-workspace, configs) |
+| **5** | **Fase 0 — Prisma schema + seed** (25 modelos, migración SQL, 3 vendors + 20 productos demo) |
+| **6** | **Fase 0 — GitHub Actions** (ci.yml + deploy.yml) |
+| — | apps/web Next.js 14 + App Router + next-intl + Auth.js baseline |
+| — | apps/worker BullMQ (email, payout, video workers) |
+| — | packages/api tRPC routers (products, vendors, cart, orders) |
+| — | packages/ui componentes base (Button, Badge, Card, ProductCard) |
+| — | packages/integrations adapters (Stripe, R2, Resend, EasyPost, TikTok stub) |
+| — | infra/nginx + PM2 ecosystem.config.js |
 
 ### 5.2 Tareas pendientes que dependen de Henry (bloqueantes externos)
 
@@ -245,21 +280,25 @@ Estas se pueden empezar AHORA en la carpeta montada, sin esperar nada externo:
 
 ### 8.3 Próximo paso recomendado
 
-**Fase 0 — Scaffold del monorepo** (tareas #4, #5, #6). Es lo más eficiente porque:
-- No depende de VPS ni Stripe.
-- Avanza el proyecto mientras se desbloquean las cuentas externas.
-- Al llegar el VPS, ya tienes código listo para deploy.
+**✅ Fase 0 COMPLETADA.** El siguiente paso es **Fase 1 — Auth + Vendor Onboarding**.
 
-Generar en este orden:
-1. Configs raíz (`package.json` workspace, `pnpm-workspace.yaml`, `tsconfig.base.json`, ESLint, Prettier, EditorConfig).
-2. `docker-compose.yml` (Postgres + Redis local).
-3. `.env.example` con todas las variables del documento de arquitectura.
-4. `packages/db/` con schema Prisma completo + migración inicial + seed script.
-5. `apps/web/` con Next.js 14, App Router, Tailwind, shadcn baseline, next-intl, layout raíz bilingüe.
-6. `apps/worker/` con BullMQ stub.
-7. `packages/api/` con tRPC server stub.
-8. `packages/ui/` con componentes shadcn iniciales.
-9. `.github/workflows/ci.yml`.
+Antes de arrancar Fase 1, Henry debe:
+1. Correr `pnpm install` en su laptop.
+2. Correr `docker compose up -d` para levantar Postgres + Redis locales.
+3. Copiar `.env.example` → `.env` y rellenar las variables mínimas de desarrollo.
+4. Correr `pnpm db:migrate:dev` y `pnpm db:seed`.
+5. Correr `pnpm dev` para verificar que la app arranca en http://localhost:3000.
+6. Hacer commit + push de la Fase 0.
+
+**Fase 1 implementará (en orden):**
+1. Páginas de auth: `/auth/signin`, `/auth/signup`, `/auth/error`
+2. Formulario de registro de vendor (`/vendor/signup`)
+3. Subida de documentos a R2 (W-9, ID)
+4. Stripe Connect Express onboarding flow
+5. Panel admin mínimo: lista vendors pendientes, aprobar/rechazar
+6. Emails transaccionales: vendor aprobado/rechazado (Resend)
+
+**Fase 1 requiere:** Stripe activo (iniciar ya — tarda 2-7 días) + R2 (Cloudflare, rápido).
 
 ### 8.4 Restricciones importantes
 

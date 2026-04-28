@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@shop/config": "workspace:*",
-    "@shop/typescript-config": "workspace:*",
     "@types/node": "^22.8.7",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

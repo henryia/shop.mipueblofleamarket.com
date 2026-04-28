@@ -450,7 +450,7 @@ async function main() {
       update: {},
       create: {
         vendorId: vendor.vendorId,
-        categoryId,
+        categoryId: categoryId ?? null,
         titleEn: tmpl.titleEn,
         titleEs: tmpl.titleEs,
         slug,

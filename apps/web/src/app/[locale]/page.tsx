@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
 import type { Metadata } from 'next'
 
 interface HomePageProps {
@@ -29,18 +30,18 @@ export default function HomePage() {
             {t('subtitle')}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-            <a
-              href="#"
+            <Link
+              href="/products"
               className="inline-flex min-h-touch items-center justify-center rounded-full bg-white px-8 font-semibold text-brand-600 transition hover:bg-brand-50"
             >
               {t('ctaBrowse')}
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/auth/signup"
               className="inline-flex min-h-touch items-center justify-center rounded-full border-2 border-white px-8 font-semibold text-white transition hover:bg-white/10"
             >
               {t('ctaVendor')}
-            </a>
+            </Link>
           </div>
         </div>
       </section>

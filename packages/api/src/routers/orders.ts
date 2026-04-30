@@ -12,7 +12,7 @@ export const ordersRouter = router({
     .query(async ({ ctx, input }) => {
       const orders = await prisma.order.findMany({
         take: input.limit + 1,
-        cursor: input.cursor ? { id: input.cursor } : undefined,
+        ...(input.cursor ? { cursor: { id: input.cursor } } : {}),
         where: { buyerId: ctx.user.id },
         include: {
           items: {
@@ -67,14 +67,14 @@ export const ordersRouter = router({
   // ── Vendor: mis pedidos a atender ──────────────────────────────────────
   vendorOrders: vendorProcedure
     .input(z.object({
-      status: z.enum(['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED']).optional(),
+      status: z.enum(['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED']).optional(),
       limit: z.number().min(1).max(50).default(20),
       cursor: z.string().optional(),
     }))
     .query(async ({ ctx, input }) => {
       return prisma.orderItem.findMany({
         take: input.limit + 1,
-        cursor: input.cursor ? { id: input.cursor } : undefined,
+        ...(input.cursor ? { cursor: { id: input.cursor } } : {}),
         where: {
           vendorId: ctx.vendorId,
           ...(input.status ? { status: input.status } : {}),
@@ -104,7 +104,7 @@ export const ordersRouter = router({
     .query(async ({ input }) => {
       const orders = await prisma.order.findMany({
         take: input.limit + 1,
-        cursor: input.cursor ? { id: input.cursor } : undefined,
+        ...(input.cursor ? { cursor: { id: input.cursor } } : {}),
         where: input.status ? { status: input.status as never } : undefined,
         include: {
           buyer: { select: { email: true, name: true } },

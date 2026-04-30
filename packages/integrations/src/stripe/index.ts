@@ -9,7 +9,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2024-11-20.acacia',
+  apiVersion: '2025-02-24.acacia',
   typescript: true,
 })
 
@@ -22,7 +22,7 @@ export async function createPaymentIntent(params: {
   return stripe.paymentIntents.create({
     amount: params.amountCents,
     currency: params.currency ?? 'usd',
-    metadata: params.metadata ?? {},
+    metadata: params.metadata ?? ({} as Record<string, string>),
     automatic_payment_methods: { enabled: true },
   })
 }
@@ -81,8 +81,8 @@ export async function refundPayment(params: {
 }) {
   return stripe.refunds.create({
     payment_intent: params.paymentIntentId,
-    amount: params.amountCents,
     reason: params.reason ?? 'requested_by_customer',
+    ...(params.amountCents !== undefined && { amount: params.amountCents }),
   })
 }
 

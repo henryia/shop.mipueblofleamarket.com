@@ -10,6 +10,36 @@ const config: Omit<Config, 'content'> = {
   theme: {
     extend: {
       colors: {
+        // ── Variables shadcn/ui (mapean a CSS vars definidas en globals.css) ─
+        background:  'hsl(var(--background))',
+        foreground:  'hsl(var(--foreground))',
+        card: {
+          DEFAULT:    'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        popover: {
+          DEFAULT:    'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        primary: {
+          DEFAULT:    'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        muted: {
+          DEFAULT:    'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT:    'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        destructive: {
+          DEFAULT:    'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        border: 'hsl(var(--border))',
+        input:  'hsl(var(--input))',
+        ring:   'hsl(var(--ring))',
         // ── Marca Mi Pueblo ────────────────────────────────────────────────
         // TODO: reemplazar con los hex exactos del sitio oficial
         brand: {
@@ -25,8 +55,8 @@ const config: Omit<Config, 'content'> = {
           900: '#6e3111',
           950: '#3f1805',
         },
-        // ── Secundario (rojo) ──────────────────────────────────────────────
-        secondary: {
+        // ── Rojo Mi Pueblo (escala completa para uso directo) ─────────────
+        crimson: {
           50:  '#fff1f2',
           100: '#ffe1e3',
           200: '#ffc7cb',

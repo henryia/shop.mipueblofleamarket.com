@@ -20,7 +20,7 @@ export const productsRouter = router({
 
       const products = await prisma.product.findMany({
         take: limit + 1,
-        cursor: cursor ? { id: cursor } : undefined,
+        ...(cursor ? { cursor: { id: cursor } } : {}),
         where: {
           status: ProductStatus.ACTIVE,
           ...(categorySlug && {
